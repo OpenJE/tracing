@@ -29,7 +29,11 @@ namespace tracing {
 			const Location location;
 			#endif // TRACING
 		public:
-			Instrument( const Location location, const char* fmt, ... ) : location( location ) {
+			Instrument( const Location location, const char* fmt, ... )
+				#if defined( TRACING )
+				: location( location )
+				#endif // TRACING
+			{
 				#if defined( TRACING )
 				va_list args;
 				va_start( args, fmt );
